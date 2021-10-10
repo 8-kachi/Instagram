@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase //追加
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
@@ -32,16 +33,17 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             // その他のViewControllerは通常のタブ切り替えを実施
             return true
         }
+    }
+    
+    //起動時にログインしていなければログイン画面を表示させる
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        /*
-         // MARK: - Navigation
-         
-         // In a storyboard-based application, you will often want to do a little preparation before navigation
-         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-         }
-         */
-        
+        //currentUserがnilならログインしていない
+        if Auth.auth().currentUser == nil {
+            //ログインしていない時の処理
+            let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Login")
+            self.present(loginViewController!, animated: true, completion: nil)
+        }
     }
 }
