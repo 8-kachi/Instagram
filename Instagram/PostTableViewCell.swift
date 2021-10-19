@@ -19,7 +19,6 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var commentLineField: UILabel!
-    @IBOutlet weak var commentOwner: UILabel!
     
     
     override func awakeFromNib() {
@@ -53,9 +52,7 @@ class PostTableViewCell: UITableViewCell {
             }
             
             //コメントの表示
-            
-            
-            //コメント投稿者の表示
+            self.commentLineField.text = postData.comment
 
             // いいね数の表示
             let likeNumber = postData.likes.count

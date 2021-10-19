@@ -86,11 +86,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let cell = tableView.cellForRow(at: indexPath!) as! PostTableViewCell
         let comment = cell.commentTextField.text!
+        let name = Auth.auth().currentUser?.displayName
+        let data = name! + "：" + comment
         
         // 配列からタップされたインデックスのデータを取り出す
         let postData = postArray[indexPath!.row]
         
-        
+        let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
+        postRef.updateData(["comment": data])
+
     }
     
     // セル内のボタンがタップされた時に呼ばれるメソッド
