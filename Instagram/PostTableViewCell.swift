@@ -16,6 +16,11 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var commentLineField: UILabel!
+    @IBOutlet weak var commentOwner: UILabel!
+    
     
     override func awakeFromNib() {
             super.awakeFromNib()
@@ -32,7 +37,7 @@ class PostTableViewCell: UITableViewCell {
         func setPostData(_ postData: PostData) {
             // 画像の表示
             postImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postData.id + ".jpg")
+            let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postData.id + ".jpeg")
             postImageView.sd_setImage(with: imageRef)
 
             // キャプションの表示
@@ -46,6 +51,11 @@ class PostTableViewCell: UITableViewCell {
                 let dateString = formatter.string(from: date)
                 self.dateLabel.text = dateString
             }
+            
+            //コメントの表示
+            
+            
+            //コメント投稿者の表示
 
             // いいね数の表示
             let likeNumber = postData.likes.count
