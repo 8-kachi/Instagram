@@ -91,10 +91,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         // 配列からタップされたインデックスのデータを取り出す
         let postData = postArray[indexPath!.row]
+        let updateValue = FieldValue.arrayUnion([data])
         
         let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
-        postRef.updateData(["comment": data])
-
+        postRef.updateData(["comment": updateValue])
     }
     
     // セル内のボタンがタップされた時に呼ばれるメソッド
